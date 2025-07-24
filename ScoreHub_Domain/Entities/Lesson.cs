@@ -12,8 +12,11 @@ public class Lesson
     public DateTime StartTime { get; set; }
     
     public bool IsCommandLesson { get; set; }
+    
     public List<Team>? Teams { get; set; }
     
-    public List<User> Students { get; set; }
+    public List<StudentData> Students { get; set; }
     
+    public Subject Subject { get; set; } // связь с предметом один ко многим
+    public Guid SubjectId { get; set; }
 }

@@ -15,6 +15,7 @@ public class User
     public StudentData? StudentData { get; set; }
     public AssistantData? AssistantData { get; set; }
 
+    
     public User(
         string name, string email, 
         string passwordHash, string groupNumber, Role role,
