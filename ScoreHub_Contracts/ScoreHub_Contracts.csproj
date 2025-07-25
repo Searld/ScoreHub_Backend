@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\ScoreHub_Domain\ScoreHub_Domain.csproj" />
+    </ItemGroup>
+
 </Project>

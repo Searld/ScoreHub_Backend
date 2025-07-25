@@ -9,7 +9,7 @@ public interface IUserRepository
     public Task<User> GetTeacherByID(Guid id);  
     public Task<User> GetStudentByID(Guid id);  
     public Task<User> GetAssistantByID(Guid id);  
-    public void AddAsync(User user);
+    public Task AddAsync(User user);
     public Task<List<User>> GetAllUsers();
     public Task<List<User>> GetAllUsersByGroup(int groupNumber);
  

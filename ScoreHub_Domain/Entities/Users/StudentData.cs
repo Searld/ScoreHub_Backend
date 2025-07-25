@@ -2,6 +2,8 @@
 
 public class StudentData
 {
+    public Guid Id { get; set; }
+    
     public Lesson Lesson { get; set; } // связь с занятием один ко многим( у одного студента может быть одно занятие, у занятия много студентов)
     public Guid LessonId { get; set; }
     

@@ -2,6 +2,8 @@
 
 public class AssistantData
 {
+    public Guid Id { get; set; }
+    
     public Team Team { get; set; }
     public Guid TeamId { get; set; }
     

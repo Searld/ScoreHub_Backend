@@ -14,28 +14,4 @@ public class User
     public TeacherData? TeacherData { get; set; }
     public StudentData? StudentData { get; set; }
     public AssistantData? AssistantData { get; set; }
-
-    
-    public User(
-        string name, string email, 
-        string passwordHash, string groupNumber, Role role,
-        TeacherData? teacherData = null,  StudentData? studentData = null, 
-        AssistantData? assistantData = null)
-    {
-        Name = name;
-        Email = email;
-        PasswordHash = passwordHash;
-        GroupNumber = groupNumber;
-        Role = role;
-        TeacherData = teacherData;
-        StudentData = studentData;
-        AssistantData = assistantData;
-    }
-    
-    public static User CreateUser(
-        string name, string email, string passwordHash, string groupNumber, Role role,
-        TeacherData? teacherData = null,  StudentData? studentData = null, AssistantData? assistantData = null)
-    {
-        return new User(name, email, passwordHash, groupNumber,role, teacherData, studentData, assistantData);
-    }
 }

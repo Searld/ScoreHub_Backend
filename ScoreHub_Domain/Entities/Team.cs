@@ -9,6 +9,6 @@ public class Team
     
     public AssistantData Assistant { get; set; }
     
-    public Lesson Lesson { get; set; } // связь с уроком один ко многим
-    public Guid LessonId { get; set; }
+    public Lesson? Lesson { get; set; } 
+    public Guid? LessonId { get; set; }
 }
