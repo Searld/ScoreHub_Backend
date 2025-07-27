@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ScoreHub_Application.Services;
 using ScoreHub_Contracts.Users;
 using ScoreHub_Domain.Entities;
@@ -17,6 +18,7 @@ public class UserController : Controller
     }
     
     [HttpGet("/user/{email}")]
+    [Authorize]
     public async Task<IActionResult> GetUserByEmail(string email)
     {
         var user = await _usersService.GetUserByEmailAsync(email);
@@ -25,21 +27,23 @@ public class UserController : Controller
     [HttpPost("/register")]
     public async Task<IActionResult> Register(RegisterUserRequest request)
     {
-        var user = new User()
-        {
-            Email = request.Email,
-            Name = request.Name,
-            AssistantData = request.Role != Role.Assistant ? null : new()
-            {
-                Team = new Team()
-            },
-            TeacherData = request.Role != Role.Teacher ? null : new(),
-            StudentData = request.Role != Role.Student ? null : new(),
-            GroupNumber = request.GroupNumber,
-            PasswordHash = request.Password,
-            Role = request.Role
-        };
-        await _usersService.RegisterUser(user);
+        await _usersService.RegisterUser(request);
         return Ok();
+    }
+
+    [HttpPost("/login")]
+    public async Task<IActionResult> Login(LoginUserRequest request)
+    {
+        var token = await _usersService.Login(request.Email, request.Password);
+        HttpContext.Response.Cookies.Append("tmp", token);
+        return Ok();
+    }
+
+    [HttpGet("/users")]
+    [Authorize]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _usersService.GetAllUsers();
+        return Ok(users);
     }
 }

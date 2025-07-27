@@ -1,4 +1,5 @@
-﻿using ScoreHub_Domain.Enums;
+﻿using System.Text.Json.Serialization;
+using ScoreHub_Domain.Enums;
 
 namespace ScoreHub_Domain.Entities;
 
