@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScoreHub_Application.Services;
 using ScoreHub_Contracts.Users;
@@ -21,9 +22,56 @@ public class UserController : Controller
     [Authorize]
     public async Task<IActionResult> GetUserByEmail(string email)
     {
-        var user = await _usersService.GetUserByEmailAsync(email);
+        //var user = await _usersService.GetUserByEmailAsync(email);
+        return Ok();
+    }
+    
+    [HttpGet("/user/{userId:guid}")]
+    [Authorize]
+    public async Task<IActionResult> GetUserByID(Guid userId)
+    {
+        var user = await _usersService.GetUserByID(userId);
         return Ok(user);
     }
+    
+    [HttpGet("/teacher")]
+    [Authorize]
+    public async Task<IActionResult> GetTeacherById()
+    {
+        var user = await _usersService
+            .GetTeacherByIdAsync(
+                Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId")?.Value));
+        return Ok(user);
+    }
+    
+    [HttpGet("/users")]
+    [Authorize]
+    public async Task<IActionResult> GetAllUsers()
+    {
+        var users = await _usersService.GetAllUsers();
+        return Ok(users);
+    }
+    
+    [HttpGet("/generate-tg-url")]
+    [Authorize]
+    public async Task<IActionResult> GenerateTgUrl()
+    {
+        var userId = Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId")?.Value);
+        var link = $"https://t.me/scorehub_bot?start={userId}";
+        return Ok(link);
+    }
+    
+    [HttpGet("/verify-tg/{userId}")]
+    public async Task<IActionResult> VerifyTgAuth(string userId)
+    {
+        if (!await _usersService.UserExists(Guid.Parse(userId)))
+        {
+            return NotFound();
+        }
+        
+        return Ok(await _usersService.GetTgToken(Guid.Parse(userId)));
+    }
+    
     [HttpPost("/register")]
     public async Task<IActionResult> Register(RegisterUserRequest request)
     {
@@ -39,11 +87,5 @@ public class UserController : Controller
         return Ok();
     }
 
-    [HttpGet("/users")]
-    [Authorize]
-    public async Task<IActionResult> GetAllUsers()
-    {
-        var users = await _usersService.GetAllUsers();
-        return Ok(users);
-    }
+    
 }

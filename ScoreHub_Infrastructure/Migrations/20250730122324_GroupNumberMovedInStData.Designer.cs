@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ScoreHub_Infrastructure;
@@ -11,9 +12,11 @@ using ScoreHub_Infrastructure;
 namespace ScoreHub_Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250730122324_GroupNumberMovedInStData")]
+    partial class GroupNumberMovedInStData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +87,7 @@ namespace ScoreHub_Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("LessonId")
+                    b.Property<Guid>("LessonId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("TeamId")
@@ -226,7 +229,9 @@ namespace ScoreHub_Infrastructure.Migrations
                 {
                     b.HasOne("ScoreHub_Domain.Entities.Lesson", "Lesson")
                         .WithMany("Students")
-                        .HasForeignKey("LessonId");
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ScoreHub_Domain.Entities.Team", "Team")
                         .WithMany("Students")

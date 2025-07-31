@@ -11,6 +11,6 @@ public interface IUserRepository
     public Task<User> GetAssistantByID(Guid id);  
     public Task AddAsync(User user);
     public Task<List<User>> GetAllUsers();
-    public Task<List<User>> GetAllUsersByGroup(int groupNumber);
+    public Task<List<User>> GetAllStudentsByGroupNumber(string groupNumber);
  
 }

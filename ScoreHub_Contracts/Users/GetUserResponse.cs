@@ -2,4 +2,4 @@
 
 namespace ScoreHub_Contracts.Users;
 
-public record GetUserResponse(Guid Id, string Email, string Name, string GroupNumber, Role Role);
+public record GetUserResponse(Guid Id, string Email, string Name, Role Role);

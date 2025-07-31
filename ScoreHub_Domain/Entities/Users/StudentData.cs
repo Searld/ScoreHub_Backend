@@ -4,8 +4,10 @@ public class StudentData
 {
     public Guid Id { get; set; }
     
-    public Lesson Lesson { get; set; } // связь с занятием один ко многим( у одного студента может быть одно занятие, у занятия много студентов)
-    public Guid LessonId { get; set; }
+    public string GroupNumber { get; set; }
+    
+    public Lesson? Lesson { get; set; } // связь с занятием один ко многим( у одного студента может быть одно занятие, у занятия много студентов)
+    public Guid? LessonId { get; set; }
     
     public Team? Team { get; set; } // у студента может не быть команды(если это не командное занятие), связь один ко многим
     public Guid? TeamId { get; set; }

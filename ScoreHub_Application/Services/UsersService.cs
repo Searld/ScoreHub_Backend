@@ -21,15 +21,7 @@ public class UsersService
         _passwordHasher = passwordHasher;
         _jwtProvider = jwtProvider;
     }
-
-    public async Task<GetUserResponse> GetUserByEmailAsync(string email)
-    {
-        var userEntity = await _userRepository.GetUserByEmail(email);
-        return new GetUserResponse(
-            userEntity.Id, userEntity.Email, 
-            userEntity.Name, userEntity.GroupNumber, userEntity.Role);
-    }
-
+    
     public async Task RegisterUser(RegisterUserRequest request)
     {
         var hashedPassword = _passwordHasher.Generate(request.Password);
@@ -40,8 +32,7 @@ public class UsersService
             Email = request.Email,
             AssistantData = request.Role == Role.Assistant ? new AssistantData() : null,
             TeacherData = request.Role == Role.Teacher ? new TeacherData() : null,
-            StudentData = request.Role == Role.Student ? new StudentData() : null,
-            GroupNumber = request.GroupNumber,
+            StudentData = request.Role == Role.Student ? new StudentData() { GroupNumber = "972402"} : null,
             Name = request.Name,
             PasswordHash = hashedPassword,
             Role = request.Role
@@ -68,10 +59,60 @@ public class UsersService
         return token;
     }
 
+    public async Task<GetUserResponse> GetUserByID(Guid userId)
+    {
+        var user = await _userRepository.GetUserByID(userId);
+        return new GetUserResponse(user.Id, user.Email, user.Name, user.Role);
+    }
+
+    public async Task<bool> UserExists(Guid userId)
+    {
+        var user = await _userRepository.GetUserByID(userId);
+        return user != null;
+    }
+
+    public async Task<string> GetTgTempToken(Guid userId)
+    {
+        return _jwtProvider.GenerateTGTempToken(userId);
+    }
+    
+    public async Task<string> GetTgToken(Guid userId)
+    {
+        var user = await _userRepository.GetUserByID(userId);
+        return _jwtProvider.GenerateToken(user);
+    }
+
     public async Task<List<GetUserResponse>> GetAllUsers()
     {
         var usersEntities = await _userRepository.GetAllUsers();
         return usersEntities.Select(u=> new GetUserResponse(
-            u.Id, u.Email,  u.Name, u.GroupNumber, u.Role)).ToList();
+            u.Id, u.Email,  u.Name, u.Role)).ToList();
+    }
+    
+    public async Task<GetTeacherResponse> GetTeacherByIdAsync(Guid id)
+    {
+        var userEntity = await _userRepository.GetTeacherByID(id);
+        return new GetTeacherResponse(
+            new GetUserResponse(
+                userEntity.Id, userEntity.Email,
+                userEntity.Name, userEntity.Role), userEntity.TeacherData.Subjects);
+    }
+
+    public async Task<GetStudentResponse> GetStudentByIdAsync(Guid id)
+    {
+        var userEntity = await _userRepository.GetStudentByID(id);
+        return new GetStudentResponse(
+            new GetUserResponse(
+                userEntity.Id, userEntity.Email, 
+                userEntity.Name, userEntity.Role), userEntity.StudentData.GroupNumber);
+    }
+    
+    public async Task<GetAssistantResponse> GetAssistantByIdAsync(Guid id)
+    {
+        var userEntity = await _userRepository.GetAssistantByID(id);
+        return new GetAssistantResponse(
+            new GetUserResponse(
+                userEntity.Id, userEntity.Email, 
+                userEntity.Name, userEntity.Role));
     }
 }

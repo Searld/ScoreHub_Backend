@@ -5,4 +5,6 @@ namespace ScoreHub_Infrastructure;
 public interface IJwtProvider
 {
     public string GenerateToken(User user);
+    public string GenerateTGTempToken(Guid userId);
+
 }

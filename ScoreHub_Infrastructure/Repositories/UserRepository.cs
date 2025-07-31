@@ -17,30 +17,37 @@ public class UserRepository : IUserRepository
     public async Task<User> GetUserByEmail(string email)
     {
         return await _context.Users
-            .Include(u => u.AssistantData)
-            .Include(u => u.TeacherData)
-            .Include(u => u.StudentData)
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<User> GetUserByID(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User> GetTeacherByID(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+            .Include(u=>u.TeacherData)
+            .Where(u=>u.Role == Role.Teacher)
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User> GetStudentByID(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+            .Include(u=>u.StudentData)
+            .Where(u=>u.Role == Role.Student)
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task<User> GetAssistantByID(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+            .Include(u=>u.AssistantData)
+            .Where(u=>u.Role == Role.Assistant)
+            .FirstOrDefaultAsync(u => u.Id == id);
     }
 
     public async Task AddAsync(User user)
@@ -54,8 +61,11 @@ public class UserRepository : IUserRepository
         return await _context.Users.ToListAsync();
     }
 
-    public async Task<List<User>> GetAllUsersByGroup(int groupNumber)
+    public async Task<List<User>> GetAllStudentsByGroupNumber(string groupNumber)
     {
-        throw new NotImplementedException();
+        return await _context.Users
+            .Include(u=>u.StudentData)  
+            .Where(u=>u.Role == Role.Student && groupNumber == u.StudentData.GroupNumber)
+            .ToListAsync();
     }
 }

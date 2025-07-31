@@ -1,3 +1,3 @@
 ﻿namespace ScoreHub_Contracts.Users;
 
-public record GetAssistantResponse();
+public record GetAssistantResponse(GetUserResponse User);

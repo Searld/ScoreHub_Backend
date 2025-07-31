@@ -1,3 +1,5 @@
-﻿namespace ScoreHub_Contracts.Users;
+﻿using ScoreHub_Domain.Entities;
 
-public record GetTeacherResponse();
+namespace ScoreHub_Contracts.Users;
+
+public record GetTeacherResponse(GetUserResponse User, List<Subject> Subjects);

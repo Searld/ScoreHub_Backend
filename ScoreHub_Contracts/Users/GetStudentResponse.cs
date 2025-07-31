@@ -1,3 +1,3 @@
 ﻿namespace ScoreHub_Contracts.Users;
 
-public record GetStudentResponse();
+public record GetStudentResponse(GetUserResponse User, string GroupNumber);
