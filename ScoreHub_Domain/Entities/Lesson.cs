@@ -15,7 +15,7 @@ public class Lesson
     
     public List<Team>? Teams { get; set; }
     
-    public List<StudentData> Students { get; set; }
+    public List<StudentData>? Students { get; set; }
     
     public Subject Subject { get; set; } // связь с предметом один ко многим
     public Guid SubjectId { get; set; }
