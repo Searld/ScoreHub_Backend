@@ -1,17 +1,18 @@
 ﻿using ScoreHub_Contracts;
 using ScoreHub_Domain.Entities;
 using ScoreHub_Domain.Repositories;
+using ScoreHub_Infrastructure.Repositories;
 
 namespace ScoreHub_Application.UseCases;
 
 public class CreateLessonUseCase
 {
-    private readonly ISubjectRepository _subjectRepository;
+    private readonly ILessonRepository _lessonRepository;
     private readonly IUserRepository _userRepository;
 
-    public CreateLessonUseCase(ISubjectRepository subjectRepository, IUserRepository userRepository)
+    public CreateLessonUseCase(ILessonRepository lessonRepository, IUserRepository userRepository)
     {
-        _subjectRepository = subjectRepository;
+        _lessonRepository = lessonRepository;
         _userRepository = userRepository;
     }
 
@@ -59,6 +60,6 @@ public class CreateLessonUseCase
             }
         }
         
-        
+        _lessonRepository.AddAsync(lesson);
     }
 }

@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ScoreHub_Application.Services;
+using ScoreHub_Application.UseCases;
+using ScoreHub_Contracts;
 using ScoreHub_Domain.Repositories;
 using ScoreHub_Infrastructure;
 using ScoreHub_Infrastructure.Repositories;
@@ -52,6 +54,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UsersService>();
+
+builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
+builder.Services.AddScoped<ILessonRepository, LessonRepository>();
+builder.Services.AddScoped<CreateLessonUseCase>();
+builder.Services.AddScoped<GetSubjectByNameUseCase>();
+builder.Services.AddScoped<CreateSubjectUseCase>();
 
 builder.Services.AddScoped<IJwtProvider, JwtProvider>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();

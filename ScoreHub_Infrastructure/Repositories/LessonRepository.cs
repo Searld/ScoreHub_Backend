@@ -21,9 +21,3 @@ public class LessonRepository : ILessonRepository
         throw new NotImplementedException();
     }
 }
-
-public interface ILessonRepository
-{
-    public Task AddAsync(Lesson lesson);
-    public Task DeleteAsync(Lesson lesson);
-}
