@@ -2,53 +2,48 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScoreHub_Application.Services;
+using ScoreHub_Application.Users.Features;
+using ScoreHub_Application.Users.Features.Login;
 using ScoreHub_Contracts.Users;
 using ScoreHub_Domain.Entities;
 using ScoreHub_Domain.Enums;
+using ScoreHub_Domain.Repositories.Features.GetAllUsers;
+using ScoreHub_Domain.Repositories.Features.GetWithFilters;
+using ScoreHub_Infrastructure;
 
 namespace ScoreHub_Backend.Controllers;
 
 [ApiController]
 public class UserController : Controller
 {
-    private readonly UsersService _usersService;
 
-    public UserController(UsersService usersService)
-    {
-        _usersService = usersService;
-    }
-    
     [HttpGet("/user/{email}")]
     [Authorize]
-    public async Task<IActionResult> GetUserByEmail(string email)
+    public async Task<IActionResult> GetByEmail(
+        string email, 
+        [FromServices] IQueryHandler<UserDto,GetUsersByEmailOrIdQuery> queryHandler)
     {
-        //var user = await _usersService.GetUserByEmailAsync(email);
-        return Ok();
+        var query = new GetUsersByEmailOrIdQuery(Email: email);
+        var user = await queryHandler.Handle(query);
+        return Ok(user);
     }
     
     [HttpGet("/user/{userId:guid}")]
     [Authorize]
-    public async Task<IActionResult> GetUserByID(Guid userId)
+    public async Task<IActionResult> GetUserById(
+        Guid userId,
+        [FromServices] IQueryHandler<UserDto,GetUsersByEmailOrIdQuery> queryHandler)
     {
-        var user = await _usersService.GetUserByID(userId);
-        return Ok(user);
-    }
-    
-    [HttpGet("/teacher")]
-    [Authorize]
-    public async Task<IActionResult> GetTeacherById()
-    {
-        var user = await _usersService
-            .GetTeacherByIdAsync(
-                Guid.Parse(HttpContext.User.Claims.FirstOrDefault(c => c.Type == "userId")?.Value));
+        var query = new GetUsersByEmailOrIdQuery(Id: userId);
+        var user = await queryHandler.Handle(query);
         return Ok(user);
     }
     
     [HttpGet("/users")]
     [Authorize]
-    public async Task<IActionResult> GetAllUsers()
+    public async Task<IActionResult> GetAllUsers([FromServices] IQueryHandler<UserDto,GetAllUsersQuery> queryHandler)
     {
-        var users = await _usersService.GetAllUsers();
+        var users = await queryHandler.Handle(new GetAllUsersQuery());
         return Ok(users);
     }
     
@@ -62,30 +57,38 @@ public class UserController : Controller
     }
     
     [HttpGet("/verify-tg/{userId}")]
-    public async Task<IActionResult> VerifyTgAuth(string userId)
+    public async Task<IActionResult> VerifyTgAuth(
+        string userId,
+        [FromServices] IQueryHandler<UserDto,GetUsersByEmailOrIdQuery> queryHandler,
+        [FromServices] TelegramService telegramService)
     {
-        if (!await _usersService.UserExists(Guid.Parse(userId)))
+        var user = await queryHandler.Handle(new GetUsersByEmailOrIdQuery(Guid.Parse(userId)));
+        if (user == null)
         {
             return NotFound();
         }
         
-        return Ok(await _usersService.GetTgToken(Guid.Parse(userId)));
+        return Ok(await telegramService.GetTgToken(Guid.Parse(userId)));
     }
     
     [HttpPost("/register")]
-    public async Task<IActionResult> Register(RegisterUserRequest request)
+    public async Task<IActionResult> Register(
+        RegisterUserDto dto, 
+        [FromServices] ICommandHandler<RegisterCommand> commandHandler)
     {
-        await _usersService.RegisterUser(request);
+        var command = new RegisterCommand(dto);
+        await commandHandler.Handle(command);
         return Ok();
     }
 
     [HttpPost("/login")]
-    public async Task<IActionResult> Login(LoginUserRequest request)
+    public async Task<IActionResult> Login(
+        LoginUserDto dto,
+        [FromServices] ICommandHandler<string, LoginCommand> commandHandler)
     {
-        var token = await _usersService.Login(request.Email, request.Password);
+        var command = new LoginCommand(dto);
+        var token = await commandHandler.Handle(command);
         HttpContext.Response.Cookies.Append("tmp", token);
         return Ok();
     }
-
-    
 }
