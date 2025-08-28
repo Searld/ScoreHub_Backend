@@ -7,6 +7,7 @@ namespace ScoreHub_Infrastructure.Repositories;
 public class SubjectRepository : ISubjectRepository
 {
     private readonly AppDbContext _context;
+    private ISubjectRepository _subjectRepositoryImplementation;
 
     public SubjectRepository(AppDbContext context)
     {
@@ -18,15 +19,13 @@ public class SubjectRepository : ISubjectRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Subject> GetSubjectByName(string name)
+    public async Task CreateLesson(Guid subjectId, Lesson lesson)
     {
-        return await _context.Subjects
-            .Include(s=>s.Lessons)
-            .FirstOrDefaultAsync(s => s.Name == name);
-    }
-
-    public Task<List<Subject>> GetAllSubjects()
-    {
-        throw new NotImplementedException();
+        var subject = _context.Subjects
+            .Include(s => s.Lessons)
+            .FirstOrDefault(s => s.Id == subjectId);
+        subject.Lessons.Add(lesson);
+        _context.Subjects.Update(subject);
+        await _context.SaveChangesAsync();
     }
 }

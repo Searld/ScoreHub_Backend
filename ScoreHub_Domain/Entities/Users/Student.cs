@@ -3,6 +3,8 @@
 public class Student : User
 {
     public string GroupNumber { get; set; }
+    
+    public List<SubjectScores> SubjectScores { get; set; }
 
     public Lesson? Lesson { get; set; }
     public Guid? LessonId { get; set; }

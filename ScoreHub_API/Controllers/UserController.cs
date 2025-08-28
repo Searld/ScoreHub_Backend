@@ -91,4 +91,14 @@ public class UserController : Controller
         HttpContext.Response.Cookies.Append("tmp", token);
         return Ok();
     }
+
+    [HttpPut("student/{userId:guid}/new-score/{subjectName}/{score:int}")]
+    public async Task<IActionResult> ChangeScore(
+        Guid userId, int score, string subjectName, 
+        [FromServices] ICommandHandler<ChangeStudentScoreCommand> commandHandler)
+    {
+        var command = new ChangeStudentScoreCommand(userId, score,subjectName);
+        await commandHandler.Handle(command);
+        return Ok();
+    }
 }

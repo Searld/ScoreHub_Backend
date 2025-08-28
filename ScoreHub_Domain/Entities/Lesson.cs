@@ -9,7 +9,7 @@
      
      public LessonStatus Status { get; set; }
      
-     public DateTime StartTime { get; set; }
+     public DateTime StartAt { get; set; }
      
      public bool IsCommandLesson { get; set; }
      
