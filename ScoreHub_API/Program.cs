@@ -30,7 +30,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
         options.Events = new JwtBearerEvents()
         {
-            OnMessageReceived = context =>
+            OnMessageReceived = context =>  
             {
                 var tokenFromCookie = context.Request.Cookies["tmp"];
 
@@ -47,8 +47,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-
-
 
 var app = builder.Build();
 

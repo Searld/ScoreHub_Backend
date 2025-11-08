@@ -16,7 +16,6 @@ namespace ScoreHub_Backend.Controllers;
 [ApiController]
 public class UserController : Controller
 {
-
     [HttpGet("/user/{email}")]
     [Authorize]
     public async Task<IActionResult> GetByEmail(
@@ -25,6 +24,7 @@ public class UserController : Controller
     {
         var query = new GetUsersByEmailOrIdQuery(Email: email);
         var user = await queryHandler.Handle(query);
+        
         return Ok(user);
     }
     

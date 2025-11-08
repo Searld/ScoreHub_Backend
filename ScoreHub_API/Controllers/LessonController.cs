@@ -10,8 +10,8 @@ public class LessonController : Controller
         
     }
 
-    public async Task<IActionResult> GetStudentsPresentAtTheLesson(Guid lessonId)
+    /*public async Task<IActionResult> GetStudentsPresentAtTheLesson(Guid lessonId)
     {
         return Ok();
-    }
+    }*/
 }
