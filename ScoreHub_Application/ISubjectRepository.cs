@@ -1,6 +1,4 @@
-﻿using ScoreHub_Domain.Entities;
-
-namespace ScoreHub_Domain.Repositories;
+﻿namespace ScoreHub_Application;
 
 public interface ISubjectRepository
 {

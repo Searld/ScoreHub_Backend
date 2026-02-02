@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ScoreHub_Application;
-using ScoreHub_Domain.Entities;
-using ScoreHub_Domain.Enums;
+using LessonMkn.Entities;
+using LessonMkn.Enums;
 
 namespace ScoreHub_Infrastructure.Users;
 

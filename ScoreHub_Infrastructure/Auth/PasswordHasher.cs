@@ -1,4 +1,6 @@
-﻿namespace ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
+
+namespace ScoreHub_Infrastructure.Auth;
 
 public class PasswordHasher : IPasswordHasher
 {

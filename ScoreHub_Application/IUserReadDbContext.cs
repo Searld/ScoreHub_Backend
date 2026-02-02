@@ -1,4 +1,4 @@
-﻿using ScoreHub_Domain.Entities;
+﻿using LessonMkn.Entities;
 
 namespace ScoreHub_Application;
 

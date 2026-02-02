@@ -8,10 +8,6 @@ namespace ScoreHub_Backend.Controllers;
 [ApiController]
 public class SubjectsController : Controller
 {
-    public SubjectsController()
-    {
-        
-    }
 
     [HttpPost("subject/{subjectId:guid}/lesson")]
     public async Task<ActionResult> CreateLesson(

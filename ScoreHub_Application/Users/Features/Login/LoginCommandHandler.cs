@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScoreHub_Domain.Repositories;
-using ScoreHub_Infrastructure;
+using ScoreHub_Application.Abstractions;
 
 namespace ScoreHub_Application.Users.Features.Login;
 

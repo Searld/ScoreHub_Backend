@@ -1,6 +1,5 @@
-﻿using ScoreHub_Contracts.Users;
-using ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
 
-namespace ScoreHub_Application.Users.Features.Login;
+namespace ScoreHub_Application.Users.Features.ChangeStudentScore;
 
 public record ChangeStudentScoreCommand(Guid Id, int NewScore, string SubjectName) : ICommand;

@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ScoreHub_Application;
-using ScoreHub_Domain.Repositories;
+using ScoreHub_Application.Abstractions;
+using ScoreHub_Application.Users;
+using ScoreHub_Infrastructure.Auth;
 using ScoreHub_Infrastructure.Repositories;
 using ScoreHub_Infrastructure.Users;
 

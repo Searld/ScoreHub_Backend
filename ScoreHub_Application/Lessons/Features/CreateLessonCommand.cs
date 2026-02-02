@@ -1,5 +1,5 @@
-﻿using ScoreHub_Contracts.Lessons;
-using ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
+using ScoreHub_Contracts.Lessons;
 
 namespace ScoreHub_Application.Lessons.Features;
 

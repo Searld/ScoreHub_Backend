@@ -1,6 +1,4 @@
-﻿using ScoreHub_Domain.Entities;
-
-namespace ScoreHub_Infrastructure.Repositories;
+﻿namespace ScoreHub_Application;
 
 public interface ILessonRepository
 {

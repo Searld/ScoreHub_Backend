@@ -1,14 +1,16 @@
 ﻿using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ScoreHub_Application.Abstractions;
 using ScoreHub_Application.Services;
 using ScoreHub_Application.Users.Features;
+using ScoreHub_Application.Users.Features.ChangeStudentScore;
+using ScoreHub_Application.Users.Features.GetAllUsers;
+using ScoreHub_Application.Users.Features.GetByEmailOrId;
 using ScoreHub_Application.Users.Features.Login;
+using ScoreHub_Application.Users.Features.Register;
 using ScoreHub_Contracts.Users;
-using ScoreHub_Domain.Entities;
-using ScoreHub_Domain.Enums;
-using ScoreHub_Domain.Repositories.Features.GetAllUsers;
-using ScoreHub_Domain.Repositories.Features.GetWithFilters;
+using LessonMkn.Enums;
 using ScoreHub_Infrastructure;
 
 namespace ScoreHub_Backend.Controllers;

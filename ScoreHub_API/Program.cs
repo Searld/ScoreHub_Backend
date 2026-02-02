@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ScoreHub_Application.Services;
-using ScoreHub_Domain.Repositories;
+using ScoreHub_Backend;
 using ScoreHub_Infrastructure;
+using ScoreHub_Infrastructure.Auth;
 using ScoreHub_Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);

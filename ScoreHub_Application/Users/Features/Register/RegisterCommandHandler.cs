@@ -1,9 +1,7 @@
-﻿using ScoreHub_Domain.Entities;
-using ScoreHub_Domain.Enums;
-using ScoreHub_Domain.Repositories;
-using ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
+using LessonMkn.Enums;
 
-namespace ScoreHub_Application.Users.Features;
+namespace ScoreHub_Application.Users.Features.Register;
 
 public class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 {
@@ -21,36 +19,8 @@ public class RegisterCommandHandler : ICommandHandler<RegisterCommand>
     public async Task Handle(RegisterCommand command)
     {
         var hashedPassword = _passwordHasher.Generate(command.Dto.Password);
-
-        User user = new object() switch
-        {
-            Role.Assistant => new Assistant()
-            {
-                Email = command.Dto.Email,
-                PasswordHash = hashedPassword,
-                Id = Guid.NewGuid(),
-                Role = Role.Assistant,
-                Name = command.Dto.Name
-            },
-            Role.Student => new Student()
-            {
-                Email = command.Dto.Email,
-                PasswordHash = hashedPassword,
-                Id = Guid.NewGuid(),
-                Role = Role.Student,
-                Name = command.Dto.Name,
-                GroupNumber = command.Dto.GroupNumber
-            },
-            Role.Teacher => new Teacher()
-            {
-                Email = command.Dto.Email,
-                PasswordHash = hashedPassword,
-                Id = Guid.NewGuid(),
-                Role = Role.Teacher,
-                Name = command.Dto.Name
-            },
-        };
         
-        await _userRepository.AddAsync(user);
+        
+        //await _userRepository.AddAsync(user);
     }
 }

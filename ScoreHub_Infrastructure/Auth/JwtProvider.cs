@@ -3,9 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using ScoreHub_Domain.Entities;
+using ScoreHub_Application.Abstractions;
 
-namespace ScoreHub_Infrastructure;
+namespace ScoreHub_Infrastructure.Auth;
 
 public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
 {

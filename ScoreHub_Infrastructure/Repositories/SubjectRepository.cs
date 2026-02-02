@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ScoreHub_Domain.Entities;
-using ScoreHub_Domain.Repositories;
+using ScoreHub_Application;
+using LessonMkn.Entities;
 
 namespace ScoreHub_Infrastructure.Repositories;
 

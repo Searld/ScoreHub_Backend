@@ -1,4 +1,4 @@
-﻿using ScoreHub_Domain.Enums;
+﻿using LessonMkn.Enums;
 
 namespace ScoreHub_Contracts.Users;
 

@@ -1,7 +1,6 @@
-﻿using ScoreHub_Domain.Entities;
-using ScoreHub_Domain.Repositories;
-using ScoreHub_Domain.Repositories.Features.GetWithFilters;
-using ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
+using ScoreHub_Application.Users.Features.GetByEmailOrId;
+using LessonMkn.Entities;
 
 namespace ScoreHub_Application.Services;
 

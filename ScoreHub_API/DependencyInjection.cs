@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using ScoreHub_Domain.Repositories;
-using ScoreHub_Infrastructure.Repositories;
+﻿using ScoreHub_Application;
+using ScoreHub_Infrastructure;
 
-namespace ScoreHub_Infrastructure;
+namespace ScoreHub_Backend;
 
 public static class DependencyInjection
 {

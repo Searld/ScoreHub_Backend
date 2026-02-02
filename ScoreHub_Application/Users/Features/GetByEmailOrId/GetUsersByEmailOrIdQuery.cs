@@ -1,5 +1,5 @@
-﻿using ScoreHub_Infrastructure;
+﻿using ScoreHub_Application.Abstractions;
 
-namespace ScoreHub_Domain.Repositories.Features.GetWithFilters;
+namespace ScoreHub_Application.Users.Features.GetByEmailOrId;
 
 public record GetUsersByEmailOrIdQuery(Guid? Id = null, string? Email=null) : IQuery;

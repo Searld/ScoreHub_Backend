@@ -1,6 +1,4 @@
-﻿using ScoreHub_Domain.Entities;
-
-namespace ScoreHub_Infrastructure;
+﻿namespace ScoreHub_Application.Abstractions;
 
 public interface IJwtProvider
 {

@@ -1,6 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using ScoreHub_Domain.Entities;
+using LessonMkn.Entities;
 
 namespace ScoreHub_Infrastructure;
 

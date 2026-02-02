@@ -1,4 +1,4 @@
-﻿namespace ScoreHub_Domain.Enums;
+﻿namespace LessonMkn.Enums;
 
 public enum LessonStatus
 {

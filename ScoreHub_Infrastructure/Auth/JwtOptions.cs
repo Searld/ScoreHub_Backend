@@ -1,4 +1,4 @@
-﻿namespace ScoreHub_Infrastructure;
+﻿namespace ScoreHub_Infrastructure.Auth;
 
 public class JwtOptions
 {
