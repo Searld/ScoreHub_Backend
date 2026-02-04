@@ -1,17 +1,17 @@
 ﻿using ScoreHub_Application.Abstractions;
 using ScoreHub_Application.Users.Features.GetByEmailOrId;
-using LessonMkn.Entities;
+using ScoreHub_Domain.Entities;
 
 namespace ScoreHub_Application.Services;
 
 public class TelegramService
 {
     private readonly IJwtProvider _jwtProvider;
-    private readonly IQueryHandler<User, GetUsersByEmailOrIdQuery> _queryHandler;
+    private readonly IQueryHandler<Student, GetUsersByEmailOrIdQuery> _queryHandler;
 
     public TelegramService(
         IJwtProvider jwtProvider, 
-        IQueryHandler<User, GetUsersByEmailOrIdQuery> query)
+        IQueryHandler<Student, GetUsersByEmailOrIdQuery> query)
     {
         _jwtProvider = jwtProvider;
         _queryHandler = query;

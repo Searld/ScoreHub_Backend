@@ -5,9 +5,9 @@ namespace ScoreHub_Application.Users.Features.GetAllUsers;
 
 public class GetAllUsers : IQueryHandler<IEnumerable<UserDto>, GetAllUsersQuery>
 {
-    private readonly IUserReadDbContext _context;
+    private readonly IStudentReadDbContext _context;
 
-    public GetAllUsers(IUserReadDbContext context)
+    public GetAllUsers(IStudentReadDbContext context)
     {
         _context = context;
     }

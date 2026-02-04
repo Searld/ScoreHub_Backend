@@ -1,4 +1,4 @@
-﻿namespace LessonMkn.Entities;
+﻿namespace ScoreHub_Domain.Entities.MKN;
 
 public class Mkn
 {
@@ -11,6 +11,6 @@ public class Mkn
     public double FinalScores { get; set; }
     public double RawMark { get; set; }
     public double FinalMark { get; set; }
-    
-    
+
+    public List<LessonMkn> Lessons { get; set; } = new();
 }

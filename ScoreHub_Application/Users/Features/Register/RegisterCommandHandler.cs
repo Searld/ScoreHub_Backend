@@ -1,18 +1,17 @@
 ﻿using ScoreHub_Application.Abstractions;
-using LessonMkn.Enums;
 
 namespace ScoreHub_Application.Users.Features.Register;
 
 public class RegisterCommandHandler : ICommandHandler<RegisterCommand>
 {
-    private readonly IUserRepository _userRepository;
+    private readonly IStudentRepository _studentRepository;
     private readonly IPasswordHasher _passwordHasher;
 
     public RegisterCommandHandler(
-        IUserRepository userRepository, 
+        IStudentRepository studentRepository, 
         IPasswordHasher passwordHasher)
     {
-        _userRepository = userRepository;
+        _studentRepository = studentRepository;
         _passwordHasher = passwordHasher;
     }
     

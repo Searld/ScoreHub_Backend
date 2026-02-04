@@ -1,4 +1,6 @@
-﻿namespace LessonMkn.Entities;
+﻿using ScoreHub_Domain.Enums;
+
+namespace ScoreHub_Domain.Entities.MKN;
 
 public class LessonMkn
 {
@@ -8,4 +10,6 @@ public class LessonMkn
      public List<double> Scores { get; set; }
      public double Score { get; set; }
      public double AdditionalCoefficient  { get; set; }
+     public LessonStatus Status { get; set; }
+     public bool IsStudentAttended { get; set; } 
 }

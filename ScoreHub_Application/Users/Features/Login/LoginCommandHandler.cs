@@ -5,13 +5,13 @@ namespace ScoreHub_Application.Users.Features.Login;
 
 public class LoginCommandHandler : ICommandHandler<string, LoginCommand>
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IUserReadDbContext _readDbContext;
+    private readonly IStudentRepository _studentRepository;
+    private readonly IStudentReadDbContext _readDbContext;
     private readonly IPasswordHasher _passwordHasher;
     private readonly IJwtProvider _jwtProvider;
 
     public LoginCommandHandler(
-        IUserReadDbContext readDbContext, 
+        IStudentReadDbContext readDbContext, 
         IPasswordHasher passwordHasher, 
         IJwtProvider jwtProvider)
     {
@@ -21,19 +21,19 @@ public class LoginCommandHandler : ICommandHandler<string, LoginCommand>
     }
     public async Task<string> Handle(LoginCommand command)
     {
-        var user = await _readDbContext.ReadUsers.FirstOrDefaultAsync(u=>u.Email == command.Dto.Email);
+        var student = await _readDbContext.ReadStudents.FirstOrDefaultAsync(u=>u.Email == command.Dto.Email);
 
-        if (user == null)
+        if (student == null)
         {
             throw new Exception("User not found");
         }
 
-        if (!_passwordHasher.Verify(user.PasswordHash, command.Dto.Password))
+        if (!_passwordHasher.Verify(student.PasswordHash, command.Dto.Password))
         {
             throw new Exception("Failed to login");
         }
 
-        var token = _jwtProvider.GenerateToken(user);
+        var token = _jwtProvider.GenerateToken(student);
         return token;
     }
 }

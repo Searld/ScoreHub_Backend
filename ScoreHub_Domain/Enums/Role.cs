@@ -1,5 +1,5 @@
 ﻿
-namespace LessonMkn.Enums;
+namespace ScoreHub_Domain.Enums;
 
 public enum Role
 {

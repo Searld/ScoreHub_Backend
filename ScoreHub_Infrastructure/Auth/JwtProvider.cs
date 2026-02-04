@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ScoreHub_Application.Abstractions;
+using ScoreHub_Domain.Entities;
 
 namespace ScoreHub_Infrastructure.Auth;
 
@@ -11,12 +12,12 @@ public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
 {
     private readonly JwtOptions _options = options.Value;
     private readonly int _tgTokenLifeTime = 10;
-    public string GenerateToken(User user)
+    public string GenerateToken(Student student)
     {
         Claim[] claims =
         [
-            new("userId", user.Id.ToString()),
-            new(ClaimTypes.Email, user.Email)
+            new("userId", student.StudentId.ToString()),
+            new(ClaimTypes.Email, student.Email)
         ];
         
         var signingCredentials = new SigningCredentials(

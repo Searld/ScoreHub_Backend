@@ -6,9 +6,9 @@ namespace ScoreHub_Application.Users.Features.GetByEmailOrId;
 
 public class GetUsersByEmailOrId : IQueryHandler<UserDto, GetUsersByEmailOrIdQuery>
 {
-    private readonly IUserReadDbContext _context;
+    private readonly IStudentReadDbContext _context;
 
-    public GetUsersByEmailOrId(IUserReadDbContext context)
+    public GetUsersByEmailOrId(IStudentReadDbContext context)
     {
         _context = context;
     }

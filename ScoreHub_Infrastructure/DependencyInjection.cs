@@ -18,17 +18,15 @@ public static class DependencyInjection
         {
             options.UseNpgsql(configuration.GetConnectionString(nameof(AppDbContext)));
         });
-        services.AddDbContext<UserDbContext>(options =>
+        services.AddDbContext<StudentDbContext>(options =>
         {
             options.UseNpgsql(configuration.GetConnectionString(nameof(AppDbContext)));
         });
-        services.AddScoped<IUserReadDbContext>(provider => 
-            provider.GetRequiredService<UserDbContext>());
+        services.AddScoped<IStudentReadDbContext>(provider => 
+            provider.GetRequiredService<StudentDbContext>());
         
-        services.AddScoped<IUserRepository, UserRepository>();
-
-        services.AddScoped<ISubjectRepository, SubjectRepository>();
-        services.AddScoped<ILessonRepository, LessonRepository>();
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        
 
         services.AddScoped<IJwtProvider, JwtProvider>();
         services.AddScoped<IPasswordHasher, PasswordHasher>();

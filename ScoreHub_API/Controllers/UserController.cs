@@ -1,17 +1,12 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ScoreHub_Application.Abstractions;
 using ScoreHub_Application.Services;
-using ScoreHub_Application.Users.Features;
-using ScoreHub_Application.Users.Features.ChangeStudentScore;
 using ScoreHub_Application.Users.Features.GetAllUsers;
 using ScoreHub_Application.Users.Features.GetByEmailOrId;
 using ScoreHub_Application.Users.Features.Login;
 using ScoreHub_Application.Users.Features.Register;
 using ScoreHub_Contracts.Users;
-using LessonMkn.Enums;
-using ScoreHub_Infrastructure;
 
 namespace ScoreHub_Backend.Controllers;
 
@@ -91,16 +86,6 @@ public class UserController : Controller
         var command = new LoginCommand(dto);
         var token = await commandHandler.Handle(command);
         HttpContext.Response.Cookies.Append("tmp", token);
-        return Ok();
-    }
-
-    [HttpPut("student/{userId:guid}/new-score/{subjectName}/{score:int}")]
-    public async Task<IActionResult> ChangeScore(
-        Guid userId, int score, string subjectName, 
-        [FromServices] ICommandHandler<ChangeStudentScoreCommand> commandHandler)
-    {
-        var command = new ChangeStudentScoreCommand(userId, score,subjectName);
-        await commandHandler.Handle(command);
         return Ok();
     }
 }
