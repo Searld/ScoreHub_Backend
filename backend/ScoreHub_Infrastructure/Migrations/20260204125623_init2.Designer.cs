@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ScoreHub_Infrastructure;
@@ -12,9 +13,11 @@ using ScoreHub_Infrastructure;
 namespace ScoreHub_Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260204125623_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,7 +103,7 @@ namespace ScoreHub_Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("MknId")
+                    b.Property<Guid>("MknId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
@@ -136,7 +139,9 @@ namespace ScoreHub_Infrastructure.Migrations
                 {
                     b.HasOne("ScoreHub_Domain.Entities.MKN.Mkn", "Mkn")
                         .WithMany()
-                        .HasForeignKey("MknId");
+                        .HasForeignKey("MknId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Mkn");
                 });

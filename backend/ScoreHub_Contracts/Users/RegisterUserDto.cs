@@ -3,4 +3,4 @@
 namespace ScoreHub_Contracts.Users;
 
 public record RegisterUserDto(
-    string Name, string Email, string Password, Role Role, string? GroupNumber);
+    string Name, string Surname, string? Patronymic, string Email, string Password, string? GroupNumber);
