@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ScoreHub_Application.Services;
 using ScoreHub_Backend;
+using ScoreHub_Backend.Middlewares;
 using ScoreHub_Infrastructure;
 using ScoreHub_Infrastructure.Auth;
 using ScoreHub_Infrastructure.Repositories;
@@ -51,6 +52,7 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseSwagger();
 app.UseSwaggerUI();
 

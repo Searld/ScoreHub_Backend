@@ -10,6 +10,7 @@ public static class DependencyInjection
         services.AddApplication();
         services.AddInfrastructure(configuration);
         
+        
         return services;
     }
 }
