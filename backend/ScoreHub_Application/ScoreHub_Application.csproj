@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="MKN\Features\" />
+      <Folder Include="Repositories\" />
     </ItemGroup>
 
 </Project>

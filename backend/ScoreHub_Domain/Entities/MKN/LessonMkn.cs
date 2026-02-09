@@ -4,7 +4,7 @@ namespace ScoreHub_Domain.Entities.MKN;
 
 public class LessonMkn
 {
-     public Guid  LessonMknId { get; set; }
+     public Guid Id { get; set; }
      
      public int LessonNumber { get; set; }
      public List<LessonScore> Scores { get; set; }
@@ -13,4 +13,7 @@ public class LessonMkn
      public LessonStatus Status { get; set; } 
      public bool IsStudentAttended { get; set; } 
      public string? ReasonForAbsence  { get; set; }
+     
+     public Team Team { get; set; }
+     public Guid TeamId { get; set; }
 }

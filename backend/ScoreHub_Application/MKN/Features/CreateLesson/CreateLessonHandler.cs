@@ -6,12 +6,14 @@ namespace ScoreHub_Application.MKN.CreateLesson;
 
 public class CreateLessonHandler : ICommandHandler<CreateLessonCommand>
 {
-    public CreateLessonHandler()
+    private readonly ILessonsRepository _lessonsRepository;
+
+    public CreateLessonHandler(ILessonsRepository lessonsRepository)
     {
-        
+        _lessonsRepository = lessonsRepository;
     }
 
-    public Task Handle(CreateLessonCommand command)
+    public async Task Handle(CreateLessonCommand command)
     {
         var lesson = new LessonMkn()
         {
@@ -21,7 +23,9 @@ public class CreateLessonHandler : ICommandHandler<CreateLessonCommand>
             Status = LessonStatus.InProgress
         };
         
+        //generateTeamsHandler.Handle
         
         
+        await _lessonsRepository.AddAsync(lesson);
     }
 }

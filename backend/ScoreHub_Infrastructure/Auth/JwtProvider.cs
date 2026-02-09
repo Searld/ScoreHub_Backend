@@ -16,7 +16,7 @@ public class JwtProvider(IOptions<JwtOptions> options) : IJwtProvider
     {
         Claim[] claims =
         [
-            new("userId", student.StudentId.ToString()),
+            new("userId", student.Id.ToString()),
             new(ClaimTypes.Email, student.Email)
         ];
         

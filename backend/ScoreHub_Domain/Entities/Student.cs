@@ -4,7 +4,7 @@ namespace ScoreHub_Domain.Entities;
 
 public class Student
 {
-    public Guid StudentId { get; set; }
+    public Guid Id { get; set; }
     
     public string Name { get; set; }
     public string Surname { get; set; }

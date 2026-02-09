@@ -2,7 +2,7 @@
 
 public class Mkn
 {
-    public Guid MknId { get; set; }
+    public Guid Id { get; set; }
     
     public double RawScores { get; set; }
     public double FirstModuleScores { get; set; }

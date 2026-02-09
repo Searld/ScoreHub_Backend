@@ -3,5 +3,7 @@
 public record CreateLessonDto(
     List<Guid> StudentIds,
     int LessonNumber,
-    string? ReasonForAbsence
+    string? ReasonForAbsence,
+    Guid TeacherId
+    
     );
